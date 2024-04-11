@@ -58,5 +58,16 @@ namespace Skiing2
 
             return prefab;
         }
+
+        public GameObject GetSound()
+        {
+            var has = TryGetEntity("Sound", out var prefab);
+            if (!has)
+            {
+                Debug.LogError($"Entity Sound not found");
+            }
+
+            return prefab;
+        }
     }
 }
