@@ -10,5 +10,12 @@ namespace Skiing2.GameRules.Game
             ctx.FinishLineEntity = finishLine;
             return finishLine;
         }
+
+        public static void DestroyFinishLine(GameBusinessContext ctx, FinishLineEntity finishLine)
+        {
+            if (finishLine == null) return;
+            ctx.FinishLineEntity = null;
+            finishLine.TearDown();
+        }
     }
 }
