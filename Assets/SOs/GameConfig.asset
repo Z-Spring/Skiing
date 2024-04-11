@@ -12,15 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52fac6a1ef3c46f38e820206f79d78dd, type: 3}
   m_Name: GameConfig
   m_EditorClassIdentifier: 
-  backgroundPrefab: {fileID: 5720647339739007224, guid: e4da6a5d7a021a4409760634742c41ab, type: 3}
   initSlimeNum: 70
-  slimePrefabs:
-  - {fileID: 2272168572472807252, guid: 1733fb7cac4f6684cb39250012d2ea1b, type: 3}
-  - {fileID: 2272168572472807252, guid: e1052ae370fc2d243b5ba1a383e64f51, type: 3}
-  - {fileID: 2272168572472807252, guid: b93dacc3a81c22f469bc36f23b871678, type: 3}
   highScoreRadius: 0.35
   lowScoreRadius: 0.2
   middleScoreRadius: 0.27
+  colliderRadius: 0.05
   highScore: 60
   lowScore: 45
   middleScore: 30
@@ -28,5 +24,10 @@ MonoBehaviour:
   ySpeed: 2.3
   acceleration: 10
   deceleration: 10
-  finishLinePrefab: {fileID: 7006424611480580382, guid: db80dbce276e3204baa5e6220d92179c, type: 3}
-  finishLineY: 20
+  finishLineY: 40
+  bgm: {fileID: 8300000, guid: 65fbb98bf221f924c8e6c5f79bdf209d, type: 3}
+  dead: {fileID: 8300000, guid: b4b5bf9017922074096bc8e7119cbf16, type: 3}
+  fever: {fileID: 8300000, guid: b781629e9af6cc346ad8c17de5e6a411, type: 3}
+  levelUp: {fileID: 8300000, guid: 4a410c847c398ab40a17dea0016edc84, type: 3}
+  ski: {fileID: 8300000, guid: dc0f9112518bb3249ab7b342cfb883e2, type: 3}
+  perfect: {fileID: 8300000, guid: d1780fc35944a5f43a57d74aea6fed9f, type: 3}

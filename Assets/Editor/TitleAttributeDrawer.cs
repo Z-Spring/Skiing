@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 using System.Linq;
-using Common.Attributes;
+using Skiing2;
 
 [CustomPropertyDrawer(typeof(TitleAttribute))]
 internal sealed class TitleDrawer : DecoratorDrawer

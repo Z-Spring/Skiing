@@ -1,5 +1,3 @@
-using Skiing2.Runtime.Common;
-
 namespace Skiing2
 {
     public class GameFSMComponent
@@ -24,6 +22,16 @@ namespace Skiing2
         public void PlayGame()
         {
             state = GameState.Playing;
+        }
+        
+        public void FailGame()
+        {
+            state = GameState.Fail;
+        }
+
+        public void WinGame()
+        {
+            state = GameState.Win;
         }
     }
 }

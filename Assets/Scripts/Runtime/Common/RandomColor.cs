@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Skiing2.Runtime.Common
+namespace Skiing2
 {
     public static class RandomColor
     {

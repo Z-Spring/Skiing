@@ -1,48 +1,51 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Skiing2.Runtime.Common.Pool
+namespace Skiing2
 {
-    public class SlimePool : MonoBehaviour
+    public static class SlimePool
     {
-        int initSlimeNum;
-        GameObject[] slimePrefabs;
+        static  Queue<GameObject> slimePool ;
+        public static GameObject slimePrefab;
+        public static Transform parent;
 
-        readonly Queue<GameObject> enemyPool = new();
-
-
-        public void InitPool()
+        public static void InitPool(int initSlimeNum)
         {
+            slimePool = new();
             SpawnSlime(initSlimeNum);
         }
 
-        void SpawnSlime(int num)
+        static void SpawnSlime(int num)
         {
             for (int i = 0; i < num; i++)
             {
-                var randomEnemy = slimePrefabs[Random.Range(0, slimePrefabs.Length)];
-                GameObject go = Instantiate(randomEnemy, transform);
+                GameObject go = GameObject.Instantiate(slimePrefab,parent);
                 go.SetActive(false);
-                enemyPool.Enqueue(go);
+                slimePool.Enqueue(go);
             }
         }
 
-        public void ReturnSlime(GameObject slime)
+        public static void ReturnSlime(GameObject slime)
         {
-            enemyPool.Enqueue(slime);
+            slimePool.Enqueue(slime);
             slime.SetActive(false);
         }
 
-        public GameObject GetSlimeFromPool()
+        public static GameObject GetSlimeFromPool()
         {
-            if (enemyPool.Count == 0)
+            if (slimePool.Count == 0)
             {
                 SpawnSlime(1);
             }
 
-            GameObject go = enemyPool.Dequeue();
+            GameObject go = slimePool.Dequeue();
             go.SetActive(true);
             return go;
         }
+        
+        public static void TearDown()
+        {
+            slimePool.Clear();
+        } 
     }
 }

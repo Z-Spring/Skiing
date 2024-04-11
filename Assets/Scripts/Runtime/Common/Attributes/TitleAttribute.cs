@@ -1,7 +1,6 @@
-using System;
 using UnityEngine;
 
-namespace Common.Attributes
+namespace Skiing2
 {
     public class TitleAttribute : PropertyAttribute
     {

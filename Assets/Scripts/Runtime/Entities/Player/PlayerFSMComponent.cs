@@ -1,5 +1,3 @@
-using Skiing2.Runtime.Common;
-
 namespace Skiing2
 {
     public class PlayerFSMComponent

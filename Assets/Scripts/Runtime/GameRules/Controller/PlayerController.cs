@@ -1,20 +1,45 @@
-using UnityEngine;
-
 namespace Skiing2.GameRules.Game
 {
     public class PlayerController
     {
-        void OnCollisionEnter2D(Collision2D other)
+        public void Tick(GameBusinessContext ctx)
         {
-            if (other.gameObject.CompareTag("Slime"))
+            var game = ctx.gameEntity;
+            var fsm = game.GameFSMComponent;
+            var status = fsm.state;
+
+            if (status == GameState.Start || status == GameState.Playing)
             {
-                // Dead();
+                PlayerDomain.MoveControl(ctx);
+                if (ctx.isMoving)
+                {
+                    if (PlayerDomain.OutOfBounds(ctx))
+                    {
+                        GameEventCenter.FailGame(ctx);
+                    }
+                    else if (PlayerDomain.WinGame(ctx))
+                    {
+                        GameEventCenter.WinGame(ctx);
+                    }
+                }
+            }
+
+            if (status != GameState.None && status != GameState.GameOver && status != GameState.Fail)
+            {
+                PlayerDomain.UpdatePlayerTrial(ctx);
             }
         }
 
-        public void Tick(GameBusinessContext ctx)
+        public void FixedTick(GameBusinessContext ctx)
         {
-            PlayerDomain.MoveControl(ctx);
+            var game = ctx.gameEntity;
+            var fsm = game.GameFSMComponent;
+            var status = fsm.state;
+
+            if (ctx.isMoving && status == GameState.Playing)
+            {
+                PlayerDomain.Move(ctx);
+            }
         }
     }
 }

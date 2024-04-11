@@ -10,26 +10,28 @@ namespace Skiing2
         float acceleration;
         float deceleration;
 
-        Color playerBodyColor;
-        Color playerHatColor;
-
         Rigidbody2D rb;
-        Transform playerBody;
-        Transform playerHat;
+        Transform playerFeet;
 
-        // Fsm
+        // Components
         PlayerFSMComponent playerFsmComponent;
+        PlayerComponent playerComponent;
+
+
+        public PlayerComponent PlayerComponent => playerComponent;
 
         public void Ctor()
         {
             playerFsmComponent = new PlayerFSMComponent();
-            
+            playerFeet = transform.GetChild(3);
+
+            var playerBody = transform.GetChild(0);
+            var playerHat = transform.GetChild(1);
+            playerComponent = new PlayerComponent(playerBody, playerHat);
+
             rb = GetComponent<Rigidbody2D>();
-            playerBody = transform.GetChild(0);
-            playerHat = transform.GetChild(1);
-            playerBody.GetComponent<SpriteRenderer>().color = playerBodyColor;
-            playerHat.GetComponent<SpriteRenderer>().color = playerHatColor;
         }
+
 
         // setter and getter
         public void SetPlayerSpeed(float xSpeed, float ySpeed)
@@ -42,12 +44,6 @@ namespace Skiing2
         {
             this.acceleration = acceleration;
             this.deceleration = deceleration;
-        }
-
-        public void SetPlayerColor(Color bodyColor, Color hatColor)
-        {
-            playerBodyColor = bodyColor;
-            playerHatColor = hatColor;
         }
 
         public void SetPlayerPosition(Vector3 position)
@@ -75,11 +71,15 @@ namespace Skiing2
             return acceleration;
         }
 
+        public Transform GetPlayerFeet()
+        {
+            return playerFeet;
+        }
+
         public Rigidbody2D GetRigidbody2D()
         {
             return rb;
         }
-
 
         public void TearDown()
         {
