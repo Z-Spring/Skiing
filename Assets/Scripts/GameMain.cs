@@ -19,6 +19,8 @@ namespace Skiing2
         AssetsInfraContext assetsInfraContext;
         TemplateInfraContext templateInfraContext;
         GameBusinessContext gameBusinessContext;
+        UIBusinessContext uiBusinessContext;
+        GameUIContext gameUIContext;
 
         // Controller
         PlayerController playerController;
@@ -33,6 +35,7 @@ namespace Skiing2
         ParticleSystem flareEffect;
         ParticleSystem smokeEffect;
         ParticleSystem confettiEffect;
+        Canvas canvas;
 
         bool isTearDown;
         int playerLayer;
@@ -50,6 +53,7 @@ namespace Skiing2
             smokeEffect = GameObject.Find("SmokeEffect").transform.GetComponent<ParticleSystem>();
             confettiEffect = GameObject.Find("ConfettiEffect").transform.GetComponent<ParticleSystem>();
             Bgm = GameObject.Find("Bgm").transform;
+            canvas = GameObject.Find("MainCanvas").GetComponent<Canvas>();
 
             startButton.onClick.AddListener(() =>
             {
@@ -61,12 +65,15 @@ namespace Skiing2
             {
                 gameBusinessContext.isPlaySound = !gameBusinessContext.isPlaySound;
                 GameBusiness.PlaySound(gameBusinessContext);
-                
             });
 
 
             assetsInfraContext = new AssetsInfraContext();
             templateInfraContext = new TemplateInfraContext();
+            gameUIContext = new GameUIContext
+            {
+                canvas = canvas,
+            };
 
             gameBusinessContext = new GameBusinessContext
             {
@@ -87,6 +94,11 @@ namespace Skiing2
                 Bgm = Bgm,
             };
 
+            uiBusinessContext = new UIBusinessContext
+            {
+                gameUIContext = gameUIContext,
+            };
+
             gameBusinessContext.gameEntity.GameFSMComponent.state = GameState.None;
 
             // Controller
@@ -101,6 +113,7 @@ namespace Skiing2
                 {
                     await LoadAssets();
                     Init();
+                    Enter();
                 }
                 catch (Exception e)
                 {
@@ -119,11 +132,19 @@ namespace Skiing2
             GameBusiness.Init(gameBusinessContext);
         }
 
+        void Enter()
+        {
+            UIBusiness.Enter(uiBusinessContext);
+        }
+
         void BindEvents()
         {
             // Bind events
             GameEventCenter.OnWinGame += GameBusiness.WinGame;
             GameEventCenter.OnFailGame += GameBusiness.FailGame;
+
+            var evt = gameUIContext.eventCenter;
+            evt.OnSettingsButtonClickHandle += () => { UIBusiness.OnSettingButtonClick(uiBusinessContext); };
         }
 
         void Update()
@@ -156,6 +177,7 @@ namespace Skiing2
             if (isTearDown) return;
             isTearDown = true;
             GameBusiness.TearDown(gameBusinessContext);
+            UIBusiness.TearDown(uiBusinessContext);
             AssetsInfra.ReleaseAssets(assetsInfraContext);
             TemplateInfra.Release(templateInfraContext);
             UnBindEvents();
@@ -163,6 +185,7 @@ namespace Skiing2
 
         async Task LoadAssets()
         {
+            await UI.LoadAssets(gameUIContext);
             await AssetsInfra.LoadAssets(assetsInfraContext);
             await TemplateInfra.LoadAssets(templateInfraContext);
         }
