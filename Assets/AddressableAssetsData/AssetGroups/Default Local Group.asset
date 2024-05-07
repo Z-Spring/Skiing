@@ -47,6 +47,24 @@ MonoBehaviour:
     m_SerializedLabels:
     - Entity
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 48ec98dc83fbf4d418bf45200c0b756a
+    m_Address: LevalImg
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UI
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ff6c611663f58854f9a0e9e3e8535eca
+    m_Address: ScorePanel
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UI
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b39b25276a9b904428e2d8200cc407eb
+    m_Address: SettingPanel
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UI
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 7c478b20751c01d44935170179d67985, type: 2}
   m_SchemaSet:
