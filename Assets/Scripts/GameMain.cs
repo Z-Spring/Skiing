@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Cinemachine;
 using Skiing2.GameRules;
 using Skiing2.GameRules.Game;
+using Skiing2.GameRules.Setting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -92,6 +93,7 @@ namespace Skiing2
                 smokeEffect = smokeEffect,
                 confettiEffect = confettiEffect,
                 Bgm = Bgm,
+                gameUIContext = gameUIContext,
             };
 
             uiBusinessContext = new UIBusinessContext
@@ -145,6 +147,8 @@ namespace Skiing2
 
             var evt = gameUIContext.eventCenter;
             evt.OnSettingsButtonClickHandle += () => { UIBusiness.OnSettingButtonClick(uiBusinessContext); };
+            evt.OnMusicSettingsButtonClickHandle += () => { UIBusiness.OnMusicButtonClick(uiBusinessContext); };
+            evt.OnCheerfulPanelButtonClickHandle += () => { UIBusiness.OnCheerfulButtonClick(uiBusinessContext); };
         }
 
         void Update()
@@ -179,7 +183,7 @@ namespace Skiing2
             GameBusiness.TearDown(gameBusinessContext);
             UIBusiness.TearDown(uiBusinessContext);
             AssetsInfra.ReleaseAssets(assetsInfraContext);
-            TemplateInfra.Release(templateInfraContext);
+            TemplateInfra.ReleaseAssets(templateInfraContext);
             UnBindEvents();
         }
 

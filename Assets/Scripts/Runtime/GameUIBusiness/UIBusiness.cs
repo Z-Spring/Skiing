@@ -1,3 +1,5 @@
+using Skiing2.GameUI;
+
 namespace Skiing2.GameRules
 {
     public class UIBusiness
@@ -14,10 +16,20 @@ namespace Skiing2.GameRules
 
         public static void OnSettingButtonClick(UIBusinessContext ctx)
         {
-            SkiingLog.Log("SettingButtonClick");
-            //todo: open setting panel
+            var settingPanel = ctx.gameUIContext.GetIndividualPanel<SettingPanel>();
+            settingPanel.SecondPanelActive(!settingPanel.IsSecondPanelActive);
         }
-        
+
+        public static void OnMusicButtonClick(UIBusinessContext ctx)
+        {
+            SettingPanelDomain.MusicButtonClick(ctx.gameUIContext);
+        }
+
+        public static void OnCheerfulButtonClick(UIBusinessContext ctx)
+        {
+            SettingPanelDomain.CheerfulButtonClick(ctx.gameUIContext);
+        }
+
         public static void TearDown(UIBusinessContext ctx)
         {
             Exit(ctx);

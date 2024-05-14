@@ -13,7 +13,7 @@ namespace Runtime.GameUI
 
         public Action OnMusicSettingsButtonClickHandle;
 
-        public void MusicSettingsButtonClick()
+        public void MusicPanelButtonClick()
         {
             OnMusicSettingsButtonClickHandle?.Invoke();
         }

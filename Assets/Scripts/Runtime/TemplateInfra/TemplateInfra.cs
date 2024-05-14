@@ -13,7 +13,7 @@ namespace Skiing2
             ctx.GameConfig = config;
         }
 
-        public static void Release(TemplateInfraContext ctx)
+        public static void ReleaseAssets(TemplateInfraContext ctx)
         {
             Addressables.Release(ctx.configHandle);
         }

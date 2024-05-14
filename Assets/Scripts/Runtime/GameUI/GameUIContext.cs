@@ -7,7 +7,7 @@ namespace Skiing2
     public class GameUIContext
     {
         public Dictionary<string, GameObject> prefabDict;
-        public Dictionary<string, MonoBehaviour> IndividualPanelCache;
+        public Dictionary<string, MonoBehaviour> individualPanelCache;
 
         public Canvas canvas;
         public UIEventCenter eventCenter;
@@ -15,7 +15,7 @@ namespace Skiing2
         public GameUIContext()
         {
             prefabDict = new Dictionary<string, GameObject>();
-            IndividualPanelCache = new Dictionary<string, MonoBehaviour>();
+            individualPanelCache = new Dictionary<string, MonoBehaviour>();
             eventCenter = new UIEventCenter();
         }
 
@@ -26,23 +26,23 @@ namespace Skiing2
 
         public void AddIndividualPanelToCache(string name, MonoBehaviour panel)
         {
-            IndividualPanelCache.Add(name, panel);
+            individualPanelCache.Add(name, panel);
         }
 
         public void RemoveIndividualPanelFromCache(string name)
         {
-            IndividualPanelCache.Remove(name);
+            individualPanelCache.Remove(name);
         }
 
         public bool TryGetIndividualPanel(string name, out MonoBehaviour panel)
         {
-            return IndividualPanelCache.TryGetValue(name, out panel);
+            return individualPanelCache.TryGetValue(name, out panel);
         }
 
         public T GetIndividualPanel<T>() where T : MonoBehaviour
         {
             string name = typeof(T).Name;
-            bool has = IndividualPanelCache.TryGetValue(name, out var prefab);
+            bool has = individualPanelCache.TryGetValue(name, out var prefab);
             if (!has)
             {
                 Debug.LogError($"GameUIContext.GetIndividualPanel<{name}>: UI Prefab not found");

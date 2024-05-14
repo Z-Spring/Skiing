@@ -12,6 +12,10 @@ namespace Skiing2.GameUI
         public Action OnSettingsButtonClick;
         public Action OnMusicSettingsButtonClick;
         public Action OnCheerfulSettingsButtonClick;
+        
+        public bool IsSecondPanelActive => secondPanel.activeSelf;
+        public bool IsMusicButtonClick { get; set; } = true;
+        public bool IsCheerfulButtonClick { get; set; } = true;
 
         GameObject settingsPanel;
         Button settingsButton;
@@ -43,12 +47,33 @@ namespace Skiing2.GameUI
             musicSettingsButton.onClick.AddListener(() => { OnMusicSettingsButtonClick?.Invoke(); });
             cheerfulSettingsButton.onClick.AddListener(() => { OnCheerfulSettingsButtonClick?.Invoke(); });
         }
-
-        public void ChangeOpenSettingSprite(Sprite sprite)
+        
+        public void ChangeMusicButtonSprite(bool isClick)
         {
-            // Change sprite
-
-            musicButtonBackground.sprite = sprite;
+            if (isClick)
+            {
+                musicButtonChildImage.sprite = settingsImages[0].music;
+                musicButtonBackground.sprite = settingsImages[0].background;
+            }
+            else
+            {
+                musicButtonChildImage.sprite = settingsImages[1].music;
+                musicButtonBackground.sprite = settingsImages[1].background;
+            }
+        }
+        
+        public void ChangeCheerfulButtonSprite(bool isClick)
+        {
+            if (isClick)
+            {
+                cheerfulButtonChildImage.sprite = settingsImages[0].cheerful;
+                cheerfulButtonBackground.sprite = settingsImages[0].background;
+            }
+            else
+            {
+                cheerfulButtonChildImage.sprite = settingsImages[1].cheerful;
+                cheerfulButtonBackground.sprite = settingsImages[1].background;
+            }
         }
 
 
@@ -62,14 +87,9 @@ namespace Skiing2.GameUI
             settingsPanel.SetActive(true);
         }
 
-        public void ShowSecondPanel()
+        public void SecondPanelActive(bool active)
         {
-            secondPanel.SetActive(true);
-        }
-
-        public void HideSecondPanel()
-        {
-            secondPanel.SetActive(false);
+            secondPanel.SetActive(active);
         }
 
         void OnDestroy()
@@ -77,7 +97,7 @@ namespace Skiing2.GameUI
             settingsButton.onClick.RemoveAllListeners();
             musicSettingsButton.onClick.RemoveAllListeners();
             cheerfulSettingsButton.onClick.RemoveAllListeners();
-            
+
             OnSettingsButtonClick = null;
             OnMusicSettingsButtonClick = null;
             OnCheerfulSettingsButtonClick = null;

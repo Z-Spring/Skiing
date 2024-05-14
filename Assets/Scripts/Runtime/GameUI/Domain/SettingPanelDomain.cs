@@ -1,3 +1,5 @@
+using Skiing2.GameRules.Game;
+
 namespace Skiing2.GameUI
 {
     public static class SettingPanelDomain
@@ -14,7 +16,7 @@ namespace Skiing2.GameUI
             
             panel.OnMusicSettingsButtonClick += () =>
             {
-                ctx.eventCenter.MusicSettingsButtonClick();
+                ctx.eventCenter.MusicPanelButtonClick();
             };
             
             panel.OnCheerfulSettingsButtonClick += () =>
@@ -32,6 +34,22 @@ namespace Skiing2.GameUI
         public static void ChangeSprite(GameUIContext ctx)
         {
             var settingPanel = ctx.GetIndividualPanel<SettingPanel>();
+        }
+        
+        public static void MusicButtonClick(GameUIContext ctx)
+        {
+            var settingPanel = ctx.GetIndividualPanel<SettingPanel>();
+            settingPanel.IsMusicButtonClick = !settingPanel.IsMusicButtonClick;
+            settingPanel.ChangeMusicButtonSprite(settingPanel.IsMusicButtonClick);
+            // todo: add sound
+            // GameDomain.PlaySound();
+        }
+        
+        public static void CheerfulButtonClick(GameUIContext ctx)
+        {
+            var settingPanel = ctx.GetIndividualPanel<SettingPanel>();
+            settingPanel.IsCheerfulButtonClick = !settingPanel.IsCheerfulButtonClick;
+            settingPanel.ChangeCheerfulButtonSprite(settingPanel.IsCheerfulButtonClick);
         }
         
         

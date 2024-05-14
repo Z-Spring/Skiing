@@ -1,7 +1,9 @@
+using System;
 using UnityEngine;
 
 namespace Skiing2
 {
+    [Serializable]
     public struct SettingImages
     {
         [Header("name")] public string name;

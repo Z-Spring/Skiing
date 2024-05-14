@@ -9,6 +9,7 @@ namespace Skiing2.GameRules.Game
         // Context
         public AssetsInfraContext assetsInfraContext;
         public TemplateInfraContext templateInfraContext;
+        public GameUIContext gameUIContext;
 
 
         //Player
