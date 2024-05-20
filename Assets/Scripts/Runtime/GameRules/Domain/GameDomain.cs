@@ -1,3 +1,4 @@
+using Skiing2.Sound;
 using UnityEngine;
 
 namespace Skiing2.GameRules.Game
@@ -24,7 +25,8 @@ namespace Skiing2.GameRules.Game
             EnemyDomain.VisibilityCheck(ctx);
 
             // sound
-            SoundDomain.SpawnSound(ctx);
+            var sound = SoundDomain.SpawnSound(ctx.soundContext);
+            sound.AudioSource = sound.GetComponent<AudioSource>();
 
             // game
             var game = ctx.gameEntity;
@@ -52,7 +54,7 @@ namespace Skiing2.GameRules.Game
             PlayerDomain.DestroyPlayer(ctx, player);
             EnemyDomain.DestroyEnemy(ctx);
             FinishLineDomain.DestroyFinishLine(ctx, finishLine);
-            SoundDomain.DestroySound(ctx);
+            DestroySound(ctx);
             SlimePool.TearDown();
         }
 
@@ -83,7 +85,7 @@ namespace Skiing2.GameRules.Game
 
             ctx.followCamera.Follow = null;
             EffectService.PlayConfettiEffect(ctx);
-            SoundDomain.PlaySound(ctx, SoundType.LevelUp);
+            PlaySound(ctx, SoundType.LevelUp);
 
             SkiingLog.Log("win");
         }
@@ -97,16 +99,20 @@ namespace Skiing2.GameRules.Game
             var player = ctx.PlayerEntity;
 
             PlayerDomain.DestroyPlayer(ctx, player);
-            SoundDomain.PlaySound(ctx, SoundType.Dead);
+            PlaySound(ctx, SoundType.Dead);
 
             SkiingLog.Log("lose");
         }
 
-        // todo: temp solution
-        public static void PlaySound(GameBusinessContext ctx)
+        public static void PlaySound(GameBusinessContext ctx, SoundType soundType)
         {
-            // Play sound
-            SoundDomain.PlaySound(ctx);
+            SoundDomain.PlaySound(ctx.soundContext, soundType);
         }
+        
+        public static void DestroySound(GameBusinessContext ctx)
+        {
+            SoundDomain.DestroySound(ctx.soundContext);
+        }
+
     }
 }

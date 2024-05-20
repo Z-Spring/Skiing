@@ -1,3 +1,4 @@
+using Skiing2.Sound;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -35,7 +36,7 @@ namespace Skiing2.GameRules.Game
                 }
 
                 ctx.isTurnAround = !ctx.isTurnAround;
-                SoundDomain.PlaySound(ctx, SoundType.Ski);
+                SoundDomain.PlaySound(ctx.soundContext, SoundType.Ski);
                 if (ctx.isTurnAround != ctx.lastTurnAroundState)
                 {
                     ctx.direction = ctx.isTurnAround ? -1 : 1;

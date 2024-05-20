@@ -40,7 +40,7 @@ namespace Skiing2.GameRules.Game
             EndGame(ctx);
         }
 
-        public static void PlaySound(GameBusinessContext ctx)
+        /*public static void PlaySound(GameBusinessContext ctx)
         {
             var audioSource = ctx.Bgm.GetComponent<AudioSource>();
             // Play sound
@@ -54,6 +54,6 @@ namespace Skiing2.GameRules.Game
             }
 
             GameDomain.PlaySound(ctx);
-        }
+        }*/
     }
 }

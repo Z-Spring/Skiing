@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Runtime.GameUI;
+using Skiing2.Sound;
 using UnityEngine;
 
 namespace Skiing2
@@ -10,7 +11,12 @@ namespace Skiing2
         public Dictionary<string, MonoBehaviour> individualPanelCache;
 
         public Canvas canvas;
+        public Transform Bgm;
         public UIEventCenter eventCenter;
+        
+        public SoundContext soundContext;
+        
+        public bool IsPlayingSound { get; set; } = true;
 
         public GameUIContext()
         {

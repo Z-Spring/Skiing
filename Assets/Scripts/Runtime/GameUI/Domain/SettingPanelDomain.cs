@@ -1,4 +1,6 @@
 using Skiing2.GameRules.Game;
+using Skiing2.Sound;
+using UnityEngine;
 
 namespace Skiing2.GameUI
 {
@@ -41,8 +43,8 @@ namespace Skiing2.GameUI
             var settingPanel = ctx.GetIndividualPanel<SettingPanel>();
             settingPanel.IsMusicButtonClick = !settingPanel.IsMusicButtonClick;
             settingPanel.ChangeMusicButtonSprite(settingPanel.IsMusicButtonClick);
-            // todo: add sound
-            // GameDomain.PlaySound();
+            ctx.soundContext.SoundEntity.AudioSource.enabled = settingPanel.IsMusicButtonClick;
+            ctx.Bgm.GetComponent<AudioSource>().enabled = settingPanel.IsMusicButtonClick;
         }
         
         public static void CheerfulButtonClick(GameUIContext ctx)

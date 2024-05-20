@@ -4,18 +4,21 @@ namespace Skiing2.GameRules.Game
     {
         public void Tick()
         {
-            // Play sound
         }
 
-        public void PlaySound(GameBusinessContext ctx, SoundType soundType)
+        /*public void PlaySound(GameBusinessContext ctx, SoundType soundType)
         {
-            // Play sound
             SoundDomain.PlaySound(ctx, soundType);
         }
 
         public void StopSound(GameBusinessContext ctx)
         {
-            // Stop sound
+            SoundDomain.StopSound(ctx);
         }
+        
+        public void TearDown(GameBusinessContext ctx)
+        {
+            SoundDomain.DestroySound(ctx);
+        }*/
     }
 }

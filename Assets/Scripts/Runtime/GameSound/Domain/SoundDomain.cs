@@ -1,24 +1,24 @@
 using UnityEngine;
+using UnityEngine.Assertions;
 
-namespace Skiing2.GameRules.Game
+namespace Skiing2.Sound
 {
     public static class SoundDomain
     {
-        public static SoundEntity SpawnSound(GameBusinessContext ctx)
+        public static SoundEntity SpawnSound(SoundContext ctx)
         {
-            var sound = GameFactory.SpawnSound(ctx.assetsInfraContext, ctx.templateInfraContext);
+            var sound = SoundFactory.SpawnSound(ctx.assetsInfraContext, ctx.templateInfraContext);
             ctx.SoundEntity = sound;
             return sound;
         }
 
-        public static void DestroySound(GameBusinessContext ctx)
+        public static void DestroySound(SoundContext ctx)
         {
             ctx.SoundEntity = null;
         }
 
-        public static void PlaySound(GameBusinessContext ctx, SoundType soundType = SoundType.None)
+        public static void PlaySound(SoundContext ctx, SoundType soundType = SoundType.None)
         {
-            if (!ctx.isPlaySound) return;
             switch (soundType)
             {
                 case SoundType.Dead:
@@ -41,7 +41,14 @@ namespace Skiing2.GameRules.Game
             }
         }
 
-        static void PlaySound(GameBusinessContext ctx, AudioClip clip, float volume = 1)
+        public static void StopSound(SoundContext ctx)
+        {
+            var soundEntity = ctx.SoundEntity;
+
+            soundEntity.AudioSource.enabled = false;
+        }
+
+        static void PlaySound(SoundContext ctx, AudioClip clip, float volume = 1)
         {
             var soundEntity = ctx.SoundEntity;
             soundEntity.AudioSource.PlayOneShot(clip, volume);

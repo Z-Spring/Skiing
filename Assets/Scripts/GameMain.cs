@@ -4,6 +4,7 @@ using Cinemachine;
 using Skiing2.GameRules;
 using Skiing2.GameRules.Game;
 using Skiing2.GameRules.Setting;
+using Skiing2.Sound;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,6 +23,7 @@ namespace Skiing2
         GameBusinessContext gameBusinessContext;
         UIBusinessContext uiBusinessContext;
         GameUIContext gameUIContext;
+        SoundContext soundContext;
 
         // Controller
         PlayerController playerController;
@@ -56,24 +58,33 @@ namespace Skiing2
             Bgm = GameObject.Find("Bgm").transform;
             canvas = GameObject.Find("MainCanvas").GetComponent<Canvas>();
 
-            startButton.onClick.AddListener(() =>
+            /*startButton.onClick.AddListener(() =>
             {
                 GameBusiness.StartGame(gameBusinessContext);
                 startButton.gameObject.SetActive(false);
-            });
+            });*/
 
-            musicButton.onClick.AddListener(() =>
+            /*musicButton.onClick.AddListener(() =>
             {
                 gameBusinessContext.isPlaySound = !gameBusinessContext.isPlaySound;
                 GameBusiness.PlaySound(gameBusinessContext);
-            });
+            });*/
 
 
             assetsInfraContext = new AssetsInfraContext();
             templateInfraContext = new TemplateInfraContext();
+            
+            soundContext = new SoundContext
+            {
+                assetsInfraContext = assetsInfraContext,
+                templateInfraContext = templateInfraContext,
+            };
+            
             gameUIContext = new GameUIContext
             {
                 canvas = canvas,
+                soundContext = soundContext,
+                Bgm = Bgm,
             };
 
             gameBusinessContext = new GameBusinessContext
@@ -92,14 +103,15 @@ namespace Skiing2
                 flareEffect = flareEffect,
                 smokeEffect = smokeEffect,
                 confettiEffect = confettiEffect,
-                Bgm = Bgm,
                 gameUIContext = gameUIContext,
+                soundContext = soundContext,
             };
 
             uiBusinessContext = new UIBusinessContext
             {
                 gameUIContext = gameUIContext,
             };
+           
 
             gameBusinessContext.gameEntity.GameFSMComponent.state = GameState.None;
 
@@ -136,6 +148,7 @@ namespace Skiing2
 
         void Enter()
         {
+            GameBusiness.StartGame(gameBusinessContext);
             UIBusiness.Enter(uiBusinessContext);
         }
 

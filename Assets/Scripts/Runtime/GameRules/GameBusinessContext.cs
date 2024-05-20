@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Cinemachine;
+using Skiing2.Sound;
 using UnityEngine;
 
 namespace Skiing2.GameRules.Game
@@ -10,6 +11,7 @@ namespace Skiing2.GameRules.Game
         public AssetsInfraContext assetsInfraContext;
         public TemplateInfraContext templateInfraContext;
         public GameUIContext gameUIContext;
+        public SoundContext soundContext;
 
 
         //Player
@@ -42,18 +44,17 @@ namespace Skiing2.GameRules.Game
         public ParticleSystem flareEffect;
         public ParticleSystem smokeEffect;
         public ParticleSystem confettiEffect;
-        public Transform Bgm;
 
         public MonoBehaviour monoBehaviour;
 
-        public bool isPlaySound;
+        // public bool isPlaySound;
         public bool isStartGame;
         public List<EnemyEntity> slimesToRemove;
 
 
         public GameBusinessContext()
         {
-            isPlaySound = true;
+            // isPlaySound = true;
             direction = 1;
             lastTurnAroundState = isTurnAround;
             gameEntity = new GameEntity();

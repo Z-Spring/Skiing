@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Skiing2.Sound;
 using UnityEngine;
 
 namespace Skiing2.GameRules.Game
@@ -41,22 +42,22 @@ namespace Skiing2.GameRules.Game
                 {
                     SkiingLog.Log("collider!");
                     GameEventCenter.FailGame(ctx);
-                    SoundDomain.PlaySound(ctx, SoundType.Dead);
+                    SoundDomain.PlaySound(ctx.soundContext, SoundType.Dead);
                 }
                 else if (Physics2D.OverlapCircle(slime.transform.position, lowScoreRadius, playerLayer))
                 {
                     SkiingLog.Log("Low Score!");
-                    SoundDomain.PlaySound(ctx, SoundType.Perfect);
+                    SoundDomain.PlaySound(ctx.soundContext, SoundType.Perfect);
                 }
                 else if (Physics2D.OverlapCircle(slime.transform.position, middleScoreRadius, playerLayer))
                 {
                     SkiingLog.Log("Middle Score!");
-                    SoundDomain.PlaySound(ctx, SoundType.Perfect);
+                    SoundDomain.PlaySound(ctx.soundContext, SoundType.Perfect);
                 }
                 else if (Physics2D.OverlapCircle(slime.transform.position, highScoreRadius, playerLayer))
                 {
                     SkiingLog.Log("High Score!");
-                    SoundDomain.PlaySound(ctx, SoundType.Fever);
+                    SoundDomain.PlaySound(ctx.soundContext, SoundType.Fever);
                 }
             }
         }
